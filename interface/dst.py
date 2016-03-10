@@ -1,3 +1,58 @@
+# -*- coding: utf-8 -*-
+
+import os
+import os.path
+
+class DSt:
+
+    def __init__(self,subject):
+        self.prefix = '/mnt/storage/'
+        self.subject = subject
+    pass
+
+    @property
+    def path(self):
+        return self.prefix + self.subject
+
+    @property
+    def exists(self):
+        if os.path.exists(self.path):
+            return True
+        return False
+
+    def put(self):
+        os.mkdir(self.path)
+
+    def list(self,r=False):
+        # 若为文件，则获取到文件的内容了。若为dir，则获取到目录的内容。
+        return []
+
+    def delete(self,r=False):
+
+        if r:
+            shutil.rmtree(self.path)
+        else:
+            try:
+                os.rmdir(self.path)
+            except:
+                return 409
+
+        return 204
+
+    def copy(self,d):
+        try:
+            shutil.copytree(self.path,d.path,symlinks=True) 
+            return 200
+        except:
+            return 400
+
+    def move(self,d)
+        shutil.move(self.path,d.path) 
+
+if __name__ == '__main__':
+    pass
+
+# DSt 类完全是文件系统级别上的任务了。文件读取，属性读取等。
 
 # url 层的req的处理。然后转化为了实际的dir对象了。文件系统对象来处理了。但是dst要稍微复杂点，所以层次会多了。是的。
 

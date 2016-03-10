@@ -1,4 +1,7 @@
 
+import shutil
+from ufs.interface.meta import Meta
+from ufs.md5.st import MSt
 
 class FSt:
     def __ini__(self,subject=''):
@@ -6,9 +9,7 @@ class FSt:
         self.subject = subject
         self.prefix = '/mnt/storage/'
         self.data = {'md5':md5}
-        self.loadAttrs()
-
-    # md5,ftype
+        self.load()
 
     @property
     def path(self):
@@ -25,21 +26,20 @@ class FSt:
         return self.data.get('md5')
 
 
-    def loadAttrs():
-        with file(self.path) as f:
-            self.data = json.load(f)
+    def load():
+        m = Meta(self.path)
+        self.data = m.get()
 
-    # 前提一定是文件存在了。但是不能在setAttrs 函数中判断了。不判断业务，只执行。类中的函数，不需要思考。
-    def setAttrs(self,attrs={}):
+    def setm(self,attrs={}):
         self.data.update(attrs)
-        with file(self.path) as f:
-            json.dump(self.data,f) 
+        m = Meta(self.path)
+        m.put(self.data)
 
-    def getAttrs(self):
+    def getm(self):
         return self.data 
 
-    def put(self,md5,dataType,input):
-        if 'NULL' == dataType:
+    def put(self,md5,datatype,input):
+        if 'NULL' == datatype:
 
             if self.exists:
                 if md5 == self.md5:
@@ -48,37 +48,29 @@ class FSt:
                     return 409
             else:
                 if MSt(md5).exists:
-                    self.setAttrs({'md5':md5,'ftype':'f'})
+                    self.setm({'md5':md5,'ftype':'f'})
                     return 200
                 else:
                     return 404
 
         else: 
-            md5Obj = MSt(self.md5)
-            return md5Obj.put(input)
+            m = MSt(self.md5)
+            return m.put(input)
 
-    def get(self,stObj):
+    def get(self):
 
-        md5Obj = MSt(self.md5)
-        return md5Obj.get()
-
-    def post(self,headers):
-        self.setAttrs(headers)
-
-    def head(self):
-        return self.getAttrs()
- 
-    def copy(self,dst):
-        s = FSt(dst)
-        s.setAttrs(self.getAttrs())
-
-
-    def move(self,dst):
-        pass
+        md = MSt(self.md5)
+        return m.get()
 
     def delete(self):
-        pass
+        m = Meta(self.path)
+        m.delete()
 
+    def copy(self,d):
+        shutil.copy(self.path,d.path)
+
+    def move(self,d):
+        shutil.move(self.path,d.path)
 
 if __name__ == '__main__':
 
@@ -143,3 +135,5 @@ if __name__ == '__main__':
 # 文件的判断，主要是md5了，md5文件在，则文件在，md5文件不在，则文件不在。meta为辅助，不重要。
 
 # 关于dst，和lst，是如何使用的了？
+
+# 前提一定是文件存在了。但是不能在setAttrs 函数中判断了。不判断业务，只执行。类中的函数，不需要思考。

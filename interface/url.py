@@ -29,8 +29,6 @@ def setUrlObjHeader(urlObj,headers):
     # attrs 和 headers 之间转化？
     return stObj.setAttrs(attrs)
 
-
-
 def getUrlObjHeader(urlObj)
     stObj = url2st(urlObj)
     attrs = stObj.getAttrs()
