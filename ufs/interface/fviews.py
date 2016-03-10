@@ -1,6 +1,7 @@
 
 
 from ufs.utils.path import stp
+from ufs.interface.fst import FST
 
 def get(req):
     subject = stp(req.path)

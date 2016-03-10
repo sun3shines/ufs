@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 
 import shutil
 from ufs.interface.meta import Meta
 from ufs.md5.st import MSt
+import os
 
 class FSt:
     def __ini__(self,subject=''):
