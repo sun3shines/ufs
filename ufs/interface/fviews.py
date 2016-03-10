@@ -1,81 +1,96 @@
+# -*- coding: utf-8 -*-
 
+import json
 
-from ufs.utils.path import stp
-from ufs.interface.fst import FST
+from cloudcommon.common.bufferedhttp import jresponse
+from cloudcommon.common.common.swob import Response
+from ufs.utils.path import path2o
+from ufs.interface.fst import FSt
 
 def get(req):
-    subject = stp(req.path)
-    s = FSt(subject)
-    ecode = 200
+    param = json.loads(req.body)
+    
+    path = path2o(param.get('path'))
+    s = FSt(path)
     if not s.exists:
-        ecode = 404
-        return response(ecode)
+        return Response(status=404)
 
     app_iter = s.get()
-    return response(app_iter)
+    response = Response(app_iter=app_iter,request=req, conditional_response=True,range=range)
+    return req.get_response(response)
 
 def put(req):
-    subject = stp(req.path)
-    s = FSt(subject)
+    
+    param = req.headers
+    path = path2o(param.get('path'))
+    s = FSt(path)
+    
     md5 = req.headers.get('md5')
     datatype = req.headers.get('datatype') 
-    input = req.environ['wsgi.input']
-    ecode = s.put(md5,datatype,input)
-    return response(ecode)
+    fileinput = req.environ['wsgi.input']
+    ecode = s.put(md5,datatype,fileinput)
+    
+    return Response(status=ecode)
 
 def post(req):
     
-    path = stp(req.path)
+    param = json.loads(req.body)
+    path = path2o(param.get('path'))
+    
     s = FSt(path)
     if not s.exists:
-        ecode = 404
+        return Response(status = 404)
     attrs = req.headers
     ecode = s.setm(attrs)    
-    return response(ecode)
+    return Response(status=ecode)
 
 def head(req):
 
-    path = stp(req.path) 
+    param = json.loads(req.body)
+    path = path2o(param.get('path')) 
     s = FSt(path)
-    ecode = 200
+    
     if not s.exists:
         ecode = 404
-
+        return Response(ecode)
     data = s.getm()
-    return response(ecode,data)
+    return Response(json.dumps(data),status=ecode)
 
 def copy(req):
 
-    src = stp(req.path)
-    dst = stp(req.header.get('dst'))
+    param = json.loads(req.body)
+    src = path2o(param.get('src'))
+    dst = path2o(param.get('dst'))
     s = FSt(src)
     d = FSt(dst)
-    ecode = 200
     if not s.exists:
-        ecode = 404
+        return Response(status=404)
 
     ecode = s.copy(d)
-    return response(ecode)
+    return Response(status = ecode)
 
 def move(req):
 
-    src = stp(req.path)
-    dst = stp(req.header.get('dst'))
+    param = json.loads(req.body)
+    src = path2o(param.get('src'))
+    dst = path2o(param.get('dst'))
+    
     s = FSt(src)
     d = FSt(dst)
-    ecode = 200
+    
     if not s.exists:
-        ecode = 404
-
+        return Response(status=404)
+        
     ecode = s.move(d)
-    return response(ecode)
+    return Response(status=ecode)
 
 def delete(req):
    
-    path = stp(req.path)
+    param = json.loads(req.body)
+    path = path2o(param.get('path')) 
+    
     s = FSt(path)
-    s.delete()
-
-    ecode = 204
-    return response(ecode) 
+    ecode = s.delete()
+    
+    return Response(status=ecode) 
 

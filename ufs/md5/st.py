@@ -27,11 +27,11 @@ class MSt:
         finally:
             self.handle.close()
 
-    def put(self,input):
+    def put(self,fileinput):
         
         self.handle = file(self.path,'w')
         while True:
-            data = input.read(self.readsize)
+            data = fileinput.read(self.readsize)
             if data:
                 self.handle.write(data)
             else:
