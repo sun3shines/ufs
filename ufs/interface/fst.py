@@ -11,7 +11,7 @@ class FSt:
         self.subject = subject
         self.prefix = '/mnt/storage/'
         self.data = {'md5':md5}
-        self.load()
+        self.loadm()
 
     @property
     def path(self):
@@ -28,9 +28,13 @@ class FSt:
         return self.data.get('md5')
 
 
-    def load(self):
-        m = Meta(self.path)
-        self.data = m.get()
+    def loadm(self):
+        
+        if not os.path.exists(self.path):
+            self.data = {}
+        else:
+            m = Meta(self.path)
+            self.data = m.get()
 
     def setm(self,attrs={}):
         self.data.update(attrs)

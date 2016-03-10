@@ -39,4 +39,4 @@ def listattrs(path,r=False):
 
 if __name__ == '__main__':
 
-    print listdir('test',True) 
+    print listattrs('test',True) 
