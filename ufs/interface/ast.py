@@ -11,7 +11,7 @@ class ASt:
     def __init__(self,subject):
         
         self.subject = subject
-        self.prefix = '/mnt/storage/'
+        self.prefix = '/mnt/storage'
         self.data = {}
         self.loadm()
         
@@ -23,7 +23,7 @@ class ASt:
     
     @property
     def path(self):
-        return self.prefix + self.subject
+        return '/'.join([self.prefix,self.subject])
     
     @property
     def meta(self):

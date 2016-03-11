@@ -9,13 +9,13 @@ class FSt:
     def __ini__(self,subject=''):
 
         self.subject = subject
-        self.prefix = '/mnt/storage/'
+        self.prefix = '/mnt/storage'
         self.data = {'md5':md5}
         self.loadm()
 
     @property
     def path(self):
-        return self.subject+self.prefix
+        return '/'.join([self.prefix,self.subject])
 
     @property
     def exists(self):

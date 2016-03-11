@@ -11,13 +11,13 @@ from ufs.utils.path import listattrs
 class DSt:
 
     def __init__(self,subject):
-        self.prefix = '/mnt/storage/'
+        self.prefix = '/mnt/storage'
         self.subject = subject
     pass
 
     @property
     def path(self):
-        return self.prefix + self.subject
+        return '/'.join([self.prefix,self.subject])
 
     @property
     def exists(self):

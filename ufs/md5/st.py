@@ -6,13 +6,13 @@ import os
 class MSt:
 
     def __init__(self,subject):
-        self.prefix = '/md5/'
+        self.prefix = '/md5'
         self.subject = subject
         self.readsize = 4096 
 
     @property
     def path(self):
-        return self.prefix + self.subject
+        return '/'.join([self.prefix,self.subject])
 
     def get(self):
         

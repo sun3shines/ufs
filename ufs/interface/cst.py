@@ -12,14 +12,14 @@ from ufs.interface.meta import Meta
 class CSt:
     
     def __init__(self,subject):
-        self.prefix = '/mnt/storage/'
+        self.prefix = '/mnt/storage'
         self.subject = subject
         self.data = {}
         self.loadm()
         
     @property
     def path(self):
-        return self.prefix + self.subject
+        return '/'.join([self.prefix,self.subject])
 
     @property
     def meta(self):
