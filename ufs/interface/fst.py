@@ -6,11 +6,11 @@ from ufs.md5.st import MSt
 import os
 
 class FSt:
-    def __ini__(self,subject=''):
+    def __init__(self,subject=''):
 
         self.subject = subject
         self.prefix = '/mnt/storage'
-        self.data = {'md5':md5}
+        self.data = {}
         self.loadm()
 
     @property
@@ -60,7 +60,7 @@ class FSt:
                     return 404
 
         else: 
-            m = MSt(self.md5)
+            m = MSt(md5)
             return m.put(fileinput)
 
     def get(self):

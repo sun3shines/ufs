@@ -20,7 +20,7 @@ def listattrs(path,r=False):
     
     attrs = []
     for obj in os.listdir(path):
-        fullpath = '/'.join(path,obj)
+        fullpath = '/'.join([path,obj])
         if os.path.isfile(fullpath):
             attr = Meta(fullpath).get()
             attr.update({'path':obj})
@@ -41,7 +41,7 @@ def listcontainer(path):
     
     attrs = []
     for obj in os.listdir(path):
-        fullpath = '/'.join(path,obj)
+        fullpath = '/'.join([path,obj])
         if os.path.isfile(fullpath) and fullpath.endswith('.meta'):
             attr = Meta(fullpath).get()
             attr.update({'path':obj})

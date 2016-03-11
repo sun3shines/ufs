@@ -58,12 +58,13 @@ class ContainerHead(Task):
     
 class ContainerPost(Task):
     
-    def __init__(self,atName,**kwargs):
+    def __init__(self,atName,path,**kwargs):
         self.atName = atName
+        self.path = path
         self.kwargs = kwargs
         
     def getHeaders(self):
-        return self.kwags
+        return self.kwargs
     
     def getBody(self):
         return json.dumps({'path':'/'.join([self.atName,self.path])})
@@ -74,11 +75,11 @@ class ContainerPost(Task):
 if __name__ == "__main__": 
 
     import pdb;pdb.set_trace()
-    t = ContainerPut('she','test')
-#    t = AccountGet('she')
-#    t = AccountHead('she')
-#    t = AccountPost('she',quota=1024*1024*1024)
-
+#    t = ContainerPut('she','test')
+#    t = ContainerGet('she','test')
+#    t = ContainerHead('she','test')
+#    t = ContainerPost('she','test',quota=1024*1024*1024)
+    t = ContainerDelete('she','test')
     t = mission.execute(t)
     print t.status
     print t.data
