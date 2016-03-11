@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
+#from swift.common.exceptions import LockTimeout, MessageTimeout
 from cloudcommon.common.bufferedhttp import jresponse
 import ufs.interface.fviews
 import ufs.interface.dviews
 import ufs.interface.cviews
+import ufs.interface.aviews
 
 url2view = {}
 
@@ -17,7 +19,7 @@ strFileDelete = '/file/delete'
 url2view.update({strFileDelete:ufs.interface.fviews.delete})
 
 strFileHead = '/file/head'
-url2view.update({strFileHead,ufs.interface.fviews.head})
+url2view.update({strFileHead:ufs.interface.fviews.head})
 
 strFilePost = '/file/post'
 url2view.update({strFilePost:ufs.interface.fviews.post})
@@ -58,10 +60,25 @@ url2view.update({strContainerHead:ufs.interface.cviews.head})
 strContainerPost = '/container/post'
 url2view.update({strContainerPost:ufs.interface.cviews.post})
 
-def handlerequest(req,sdata):
+strAcountPut = '/account/put'
+url2view.update({strAcountPut:ufs.interface.aviews.put})
+
+strAcountGet = '/account/get'
+url2view.update({strAcountGet:ufs.interface.aviews.get})
+
+strAcountDelete = '/account/delete'
+url2view.update({strAcountDelete:None})
+
+strAcountHead = '/account/head'
+url2view.update({strAcountHead:ufs.interface.aviews.head})
+
+strAcountPost = '/account/post'
+url2view.update({strAcountPost:ufs.interface.aviews.post})
+
+def handlerequest(req):
     
     url = req.path
     if url not in url2view:
         return jresponse('-1','url error',req,404)
-    return url2view[url](req,sdata)
+    return url2view[url](req)
 

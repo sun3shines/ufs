@@ -55,7 +55,7 @@ class CSt:
         
     def loadm(self):
     
-        if not os.path.exists(self.path):
+        if not self.exists:
             self.data = {}
         else:
             m = Meta(self.meta)

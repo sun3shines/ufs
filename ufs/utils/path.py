@@ -22,7 +22,7 @@ def listattrs(path,r=False):
     for obj in os.listdir(path):
         fullpath = '/'.join(path,obj)
         if os.path.isfile(fullpath):
-            attr = Meta(path).get()
+            attr = Meta(fullpath).get()
             attr.update({'path':obj})
             attrs.append(attr)
         elif os.path.isdir(fullpath):
@@ -35,6 +35,18 @@ def listattrs(path,r=False):
                     'path':'l'}
         attrs.append(attr)
         
+    return attrs
+
+def listcontainer(path):
+    
+    attrs = []
+    for obj in os.listdir(path):
+        fullpath = '/'.join(path,obj)
+        if os.path.isfile(fullpath) and fullpath.endswith('.meta'):
+            attr = Meta(fullpath).get()
+            attr.update({'path':obj})
+            attrs.append(attr)
+    
     return attrs
 
 if __name__ == '__main__':

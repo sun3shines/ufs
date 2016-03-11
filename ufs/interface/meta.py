@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 import json
 import os
@@ -10,7 +11,7 @@ class Meta:
 
     def put(self,attrs):
         
-        with open(self.path) as f:
+        with file(self.path,'w') as f:
             json.dump(attrs,f) 
 
     def get(self):
