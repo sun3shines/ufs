@@ -29,15 +29,15 @@ class MSt:
 
     def put(self,fileinput):
         
-        self.handle = file(self.path,'w')
-        while True:
-            data = fileinput.read(self.readsize)
-            if data:
-                self.handle.write(data)
-            else:
-                break
+        with open(self.path,'w') as f:
+            while True:
+                data = fileinput.read(self.readsize)
+                if data:
+                    f.write(data)
+                else:
+                    break
 
-        input.close()
+#        input.close()
 
     @property
     def exists(self):

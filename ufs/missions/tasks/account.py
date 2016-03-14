@@ -67,7 +67,6 @@ class AccountHead(Task):
 
 if __name__ == "__main__": 
 
-    import pdb;pdb.set_trace()
 #    t = AccountPut('she')
     t = AccountGet('she')
 #    t = AccountHead('she')

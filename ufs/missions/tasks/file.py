@@ -49,12 +49,16 @@ class MetaPut(Task):
     
 class FileGet(Task):
     
-    def __init__(self):
-        pass
+    def __init__(self,atName,path):
+        self.atName = atName
+        self.path = path
     
     def getUrl(self):
         return strFileGet
     
+    def getBody(self):
+        return json.dumps({'path':'/'.join([self.atName,self.path])})
+
 class FileDelete(Task):
     
     def __init__(self):
@@ -65,36 +69,61 @@ class FileDelete(Task):
     
 class FileHead(Task):
     
-    def __init__(self):
-        pass
+    def __init__(self,atName,path):
+        self.atName = atName
+        self.path = path 
     
     def getUrl(self):
         return strFileHead
     
+    def getBody(self):
+        return json.dumps({'path':'/'.join([self.atName,self.path])})
+
 class FilePost(Task):
     
-    def __init__(self):
-        pass
+    def __init__(self,atName,path,**kwargs):
+        self.atName = atName
+        self.path = path
+        self.kwargs = kwargs
     
     def getUrl(self):
         return strFilePost
     
+    def getHeaders(self):
+        return self.kwargs
+
+    def getBody(self):
+        return json.dumps({'path':'/'.join([self.atName,self.path])})
+
 class FileCopy(Task):
     
-    def __init__(self):
-        pass
+    def __init__(self,atName,path,dst):
+        self.atName = atName
+        self.path = path
+        self.dst = dst
+
     
     def getUrl(self):
         return strFileCopy
-    
+
+    def getBody(self):
+        return json.dumps({'src':'/'.join([self.atName,self.path]),
+                           'dst':'/'.join([self.atName,self.dst])})    
+
 class FileMove(Task):
     
-    def __init__(self):
-        pass
-    
+    def __init__(self,atName,path,dst):
+        self.atName = atName
+        self.path = path
+        self.dst = dst
+
     def getUrl(self):
         return strFileMove
-    
+   
+    def getBody(self):
+        return json.dumps({'src':'/'.join([self.atName,self.path]),
+                           'dst':'/'.join([self.atName,self.dst])})
+ 
 if __name__ == '__main__':
     
 #    t = ContainerPut('she','test')
@@ -102,8 +131,16 @@ if __name__ == '__main__':
 #    t = ContainerHead('she','test')
 #    t = ContainerPost('she','test',quota=1024*1024*1024)
 #    t = ContainerDelete('she','test')
-    import pdb;pdb.set_trace()
-    t = FilePut('she','test/test.txt','/root/install.log') 
+#    t = FilePut('she','test/test.txt','/root/install.log') 
+#    t = MetaPut('she','test/test2.txt','8dd16a3d50854caae6a23917d41688f3')
+#    t = FileGet('she','test/cp.txt')
+#    for data in mission.download(t):
+#        print data
+#        print len(data)
+#    t = FileCopy('she','test/test.txt','test/cp.txt')
+#    t = FileMove('she','test/test2.txt','test/mv.txt')
+#    t = FilePost('she','test/mv.txt',action='move')
+    t = FileHead('she','test/mv.txt')
     t = mission.execute(t)
     print t.status
     print t.data

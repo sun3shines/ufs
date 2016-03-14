@@ -24,7 +24,6 @@ def listattrs(path,r=False):
         if os.path.isfile(fullpath):
             attr = Meta(fullpath).get()
             attr.update({'path':obj})
-            attrs.append(attr)
         elif os.path.isdir(fullpath):
             attr = {'ftype':'d',
                     'path':obj,

@@ -9,7 +9,7 @@ from ufs.utils.path import path2o
 from ufs.interface.ast import ASt
 
 def get(req):
-    import pdb;pdb.set_trace()    
+
     param = json.loads(req.body)
     path = path2o(param.get('path'))
     a = ASt(path)

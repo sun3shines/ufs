@@ -40,11 +40,13 @@ class FSt:
         self.data.update(attrs)
         m = Meta(self.path)
         m.put(self.data)
+        return 200
 
     def getm(self):
         return self.data 
 
     def put(self,md5,datatype,fileinput):
+
         if 'NULL' == datatype:
 
             if self.exists:
@@ -61,7 +63,9 @@ class FSt:
 
         else: 
             m = MSt(md5)
-            return m.put(fileinput)
+            m.put(fileinput)
+            self.setm({'md5':md5,'ftype':'f'})
+            return 200
 
     def get(self):
 
@@ -74,9 +78,11 @@ class FSt:
 
     def copy(self,d):
         shutil.copy(self.path,d.path)
+        return 200
 
     def move(self,d):
         shutil.move(self.path,d.path)
+        return 200
 
 if __name__ == '__main__':
 

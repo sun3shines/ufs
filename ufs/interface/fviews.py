@@ -16,7 +16,7 @@ def get(req):
         return Response(status=404)
 
     app_iter = s.get()
-    response = Response(app_iter=app_iter,request=req, conditional_response=True,range=range)
+    response = Response(app_iter=app_iter,request=req)
     return req.get_response(response)
 
 def put(req):
@@ -49,7 +49,7 @@ def head(req):
     param = json.loads(req.body)
     path = path2o(param.get('path')) 
     s = FSt(path)
-    
+    ecode = 200 
     if not s.exists:
         ecode = 404
         return Response(ecode)

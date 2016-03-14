@@ -74,12 +74,11 @@ class ContainerPost(Task):
     
 if __name__ == "__main__": 
 
-    import pdb;pdb.set_trace()
 #    t = ContainerPut('she','test')
-#    t = ContainerGet('she','test')
+    t = ContainerGet('she','test')
 #    t = ContainerHead('she','test')
 #    t = ContainerPost('she','test',quota=1024*1024*1024)
-    t = ContainerDelete('she','test')
+#    t = ContainerDelete('she','test')
     t = mission.execute(t)
     print t.status
     print t.data
