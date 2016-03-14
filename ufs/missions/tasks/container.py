@@ -74,8 +74,8 @@ class ContainerPost(Task):
     
 if __name__ == "__main__": 
 
-#    t = ContainerPut('she','test')
-    t = ContainerGet('she','test')
+    t = ContainerPut('she','test')
+#    t = ContainerGet('she','test')
 #    t = ContainerHead('she','test')
 #    t = ContainerPost('she','test',quota=1024*1024*1024)
 #    t = ContainerDelete('she','test')

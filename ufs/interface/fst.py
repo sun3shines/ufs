@@ -75,6 +75,7 @@ class FSt:
     def delete(self):
         m = Meta(self.path)
         m.delete()
+        return 200
 
     def copy(self,d):
         shutil.copy(self.path,d.path)

@@ -26,8 +26,9 @@ def listattrs(path,r=False):
             attr.update({'path':obj})
         elif os.path.isdir(fullpath):
             attr = {'ftype':'d',
-                    'path':obj,
-                    'list':listattrs(fullpath, r)}
+                    'path':obj}
+            if r:
+                attr.update({'list':listattrs(fullpath, r)})
             
         elif os.path.islink(fullpath):
             attr = {'ftype':'f',

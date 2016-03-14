@@ -90,6 +90,8 @@ def delete(req):
     path = path2o(param.get('path')) 
     
     s = FSt(path)
+    if not s.exists:
+        return Response(status=404)
     ecode = s.delete()
     
     return Response(status=ecode) 

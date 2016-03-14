@@ -61,12 +61,16 @@ class FileGet(Task):
 
 class FileDelete(Task):
     
-    def __init__(self):
-        pass
+    def __init__(self,atName,path):
+        self.atName = atName
+        self.path = path
     
     def getUrl(self):
         return strFileDelete
     
+    def getBody(self):
+        return json.dumps({'path':'/'.join([self.atName,self.path])})
+
 class FileHead(Task):
     
     def __init__(self,atName,path):
@@ -132,7 +136,7 @@ if __name__ == '__main__':
 #    t = ContainerPost('she','test',quota=1024*1024*1024)
 #    t = ContainerDelete('she','test')
 #    t = FilePut('she','test/test.txt','/root/install.log') 
-#    t = MetaPut('she','test/test2.txt','8dd16a3d50854caae6a23917d41688f3')
+    t = MetaPut('she','test/dr/test2.txt','8dd16a3d50854caae6a23917d41688f3')
 #    t = FileGet('she','test/cp.txt')
 #    for data in mission.download(t):
 #        print data
@@ -140,7 +144,8 @@ if __name__ == '__main__':
 #    t = FileCopy('she','test/test.txt','test/cp.txt')
 #    t = FileMove('she','test/test2.txt','test/mv.txt')
 #    t = FilePost('she','test/mv.txt',action='move')
-    t = FileHead('she','test/mv.txt')
+#    t = FileHead('she','test/mv.txt')
+#    t = FileDelete('she','test/test.txt')
     t = mission.execute(t)
     print t.status
     print t.data
