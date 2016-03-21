@@ -29,6 +29,7 @@ from cloudcommon.common.constraints import check_utf8
 from cloudcommon.common.bufferedhttp import jresponse
 
 from ufs.route.urls import handlerequest
+from ufs.swift.request import is_swift,swift2ufs
 
 class ServerController(object):
     """WSGI controller for the account server."""
@@ -37,6 +38,7 @@ class ServerController(object):
         self.logger = get_logger(conf, log_route='cloud-server')
         
     def __call__(self, env, start_response):
+        import pdb;pdb.set_trace()
         req = Request(env)
         
         self.logger.txn_id = req.headers.get('x-trans-id', None)
@@ -44,6 +46,8 @@ class ServerController(object):
             res = jresponse('-1', 'invalid utf8', req,412)
         else:
             try:
+                if is_swift(req):
+                    req = swift2ufs(req)
                 res = handlerequest(req) 
             except (Exception, Timeout):
                 self.logger.exception(_('ERROR __call__ error with %(method)s'

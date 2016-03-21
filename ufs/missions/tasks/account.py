@@ -24,7 +24,6 @@ class AccountGet(Task):
     def __init__(self,atName):
         self.atName = atName
         
-    
     def getBody(self):
         return json.dumps({'path':self.atName})
     

@@ -171,4 +171,8 @@ class Sets:
 # 比如说修改文件成功后，发送新的container/quota/set ,重新获取目录的大小了。或者文件的大小了。
 #
 # 感觉写的这个ufs，真几把无聊了。还是写点有意思的吧。因为全是类型一样的？不用怎么动脑子了？是的。
-#
+
+{'SCRIPT_NAME': '', 'REQUEST_METHOD': 'GET', 'PATH_INFO': '/v1/li', 'SERVER_PROTOCOL': 'HTTP/1.0', 'REMOTE_PORT': '59902', 'SERVER_NAME': '127.0.0.1', 'REMOTE_ADDR': '127.0.0.1', 'eventlet.input': <eventlet.wsgi.Input object at 0x296a110>, 'wsgi.url_scheme': 'http', 'SERVER_PORT': '7013', 'wsgi.input': <eventlet.wsgi.Input object at 0x296a110>, 'HTTP_HOST': '127.0.0.1:7013', 'wsgi.multithread': True, 'eventlet.posthooks': [], 'wsgi.version': (1, 0), 'RAW_PATH_INFO': '/v1/li', 'GATEWAY_INTERFACE': 'CGI/1.1', 'wsgi.run_once': False, 'wsgi.errors': <open file '<stderr>', mode 'w' at 0x7f3cb2e351e0>, 'wsgi.multiprocess': False, 'CONTENT_TYPE': None, 'HTTP_ACCEPT_ENCODING': 'identity'}
+
+{'SCRIPT_NAME': '', 'REQUEST_METHOD': 'POST', 'PATH_INFO': '/account/get', 'SERVER_PROTOCOL': 'HTTP/1.0', 'REMOTE_ADDR': '127.0.0.1', 'CONTENT_LENGTH': '15', 'eventlet.posthooks': [], 'RAW_PATH_INFO': '/account/get', 'REMOTE_PORT': '59903', 'eventlet.input': <eventlet.wsgi.Input object at 0x18600d0>, 'wsgi.url_scheme': 'http', 'SERVER_PORT': '7013', 'wsgi.input': <eventlet.wsgi.Input object at 0x18600d0>, 'HTTP_HOST': '127.0.0.1:7013', 'wsgi.multithread': True, 'wsgi.version': (1, 0), 'SERVER_NAME': '127.0.0.1', 'GATEWAY_INTERFACE': 'CGI/1.1', 'wsgi.run_once': False, 'wsgi.errors': <open file '<stderr>', mode 'w' at 0x7fe62384b1e0>, 'wsgi.multiprocess': False, 'CONTENT_TYPE': None, 'HTTP_ACCEPT_ENCODING': 'identity'}
+
