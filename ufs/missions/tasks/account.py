@@ -67,8 +67,8 @@ class AccountHead(Task):
 if __name__ == "__main__": 
 
 #    t = AccountPut('she')
-    t = AccountGet('she')
-#    t = AccountHead('she')
+#    t = AccountGet('she')
+    t = AccountHead('she')
 #    t = AccountPost('she',quota=1024*1024*1024)
 
     t = mission.execute(t)

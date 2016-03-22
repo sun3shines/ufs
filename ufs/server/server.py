@@ -46,7 +46,7 @@ class ServerController(object):
             res = jresponse('-1', 'invalid utf8', req,412)
         else:
             try:
-                if is_swift(req):
+                if is_swift(req.path):
                     req = swift2ufs(req)
                 res = handlerequest(req) 
             except (Exception, Timeout):

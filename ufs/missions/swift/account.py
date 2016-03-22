@@ -5,7 +5,7 @@ import ufs.missions.mission as mission
 
 class AccountPut(SwiftTask):
     def __init__(self,path):
-        super(AccountGet,self).__init__()
+        super(AccountPut,self).__init__()
         self.path = path
     
     def getUrl(self):
@@ -26,19 +26,23 @@ class AccountGet(SwiftTask):
         return 'GET'
     
 class AccountPost(SwiftTask):
-    def __init__(self,path):
-        super(AccountGet,self).__init__()
+    def __init__(self,path,**kwargs):
+        super(AccountPost,self).__init__()
         self.path = path
-    
+        self.kwargs = kwargs
+        
     def getUrl(self):
         return '/'.join(['',self.version,self.path])
     
     def getMethod(self):
         return 'POST'
     
+    def getHeaders(self):
+        return self.kwargs
+    
 class AccountHead(SwiftTask):
     def __init__(self,path):
-        super(AccountGet,self).__init__()
+        super(AccountHead,self).__init__()
         self.path = path
     
     def getUrl(self):
@@ -49,8 +53,13 @@ class AccountHead(SwiftTask):
    
 if __name__ == '__main__':
     
-    t = AccountGet('li')
+#    t = AccountGet('li')
+#    t = AccountPut('li')
+#    t = AccountHead('li')
+    t = AccountPost('li',quota=100)
+    import pdb;pdb.set_trace()
     t = mission.execute(t)
     print t.status
     print t.data
+    print t.headers
  
