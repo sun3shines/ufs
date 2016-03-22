@@ -1,6 +1,6 @@
 ufs unique file storage && unique file system
 
-对象存储服务端
+对象存储 客户端/服务端，使用http协议通信
 
 url路由转发，区别swift资源url访问方式，不利于横向功能扩展，ufs采用url进行接口描述。
 
@@ -10,4 +10,4 @@ url路由转发，区别swift资源url访问方式，不利于横向功能扩展
 
 md5层负责文件数据的实际读写，meta层支持元数据读写修改，st（storageobject）层负责视图文件系统描述，url层负责网络参数净化。
 
-采用不同的路由转发系统。兼容swift。
+采用不同的路由转发方式。通过路径判断，克隆environ结构，兼容swift account/container/object 等PUT/GET/DELETE/HEAD/POST 操作。 
