@@ -53,13 +53,17 @@ def head(req):
     
     param = json.loads(req.body)
     path = path2o(param.get('path'))
+    is_swift = param.get('is_swift')
  
     c = CSt(path)
     if not c.exists:
         return Response(status=404)
     
     attrs = c.getm()
-    return Response(body = json.dumps(attrs),status=200)   
+    if 'true' == is_swift:
+        return Response(status=200,headers=attrs)
+    else:
+        return Response(body = json.dumps(attrs),status=200)   
 
 def post(req):
     

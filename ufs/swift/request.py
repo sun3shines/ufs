@@ -3,7 +3,9 @@
 from ufs.swift.path import is_act,is_cnt,is_obj,is_get,\
     is_put,is_head,is_post,is_delete
     
-from ufs.swift.copy import actget,actput,actpost,acthead
+from ufs.swift.copy import actget,actput,actpost,acthead,\
+    cntput,cntget,cntdel,cnthead,cntpost
+    
 def is_swift(path):
     return path.startswith('/v1')
 
@@ -20,6 +22,19 @@ def swift2ufs(req):
             return actpost(req)
         else:
             return None
-        
+    elif is_cnt(req.path):
+        if is_get(req.method):
+            return cntget(req)
+        elif is_put(req.method):
+            return cntput(req)
+        elif is_delete(req.method):
+            return cntdel(req)
+        elif is_head(req.method):
+            return cnthead(req)
+        elif is_post(req.method):
+            return cntpost(req)
+        else:
+            return None        
+    
     return req
 

@@ -56,6 +56,7 @@ def head(req):
     attrs = a.getm()
     if 'true' == is_swift:
         return Response(status=200,headers=attrs)
-    return Response(body=json.dumps(attrs),status=200)
+    else:
+        return Response(body=json.dumps(attrs),status=200)
 
 
