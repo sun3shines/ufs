@@ -135,8 +135,8 @@ if __name__ == '__main__':
 #    t = ContainerHead('she','test')
 #    t = ContainerPost('she','test',quota=1024*1024*1024)
 #    t = ContainerDelete('she','test')
-#    t = FilePut('she','test/test.txt','/root/install.log') 
-    t = MetaPut('she','test/dr/test2.txt','8dd16a3d50854caae6a23917d41688f3')
+    t = FilePut('she','test/test.txt','/root/install.log') 
+#    t = MetaPut('she','test/dr/test2.txt','8dd16a3d50854caae6a23917d41688f3')
 #    t = FileGet('she','test/cp.txt')
 #    for data in mission.download(t):
 #        print data

@@ -48,13 +48,17 @@ def head(req):
 
     param = json.loads(req.body)
     path = path2o(param.get('path')) 
+    is_swift = param.get('is_swift')
     s = FSt(path)
     ecode = 200 
     if not s.exists:
         ecode = 404
         return Response(ecode)
     data = s.getm()
-    return Response(json.dumps(data),status=ecode)
+    if 'true' == is_swift:
+        return Response(status=ecode,headers=data)
+    else:
+        return Response(json.dumps(data),status=ecode)
 
 def copy(req):
 

@@ -38,7 +38,6 @@ class ServerController(object):
         self.logger = get_logger(conf, log_route='cloud-server')
         
     def __call__(self, env, start_response):
-        import pdb;pdb.set_trace()
         req = Request(env)
         
         self.logger.txn_id = req.headers.get('x-trans-id', None)

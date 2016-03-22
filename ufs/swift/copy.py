@@ -2,7 +2,8 @@
 
 from webob import Request
 from ufs.route.urls import strAcountGet,strAcountPut,strAcountHead,strAcountPost,\
-    strContainerGet, strContainerPut,strContainerDelete,strContainerHead,strContainerPost
+    strContainerGet, strContainerPut,strContainerDelete,strContainerHead,strContainerPost,\
+    strFilePut,strFileGet,strFileDelete,strFileHead,strFilePost
     
 import json
 from cStringIO import StringIO
@@ -102,3 +103,58 @@ def cntpost(req):
     uenv['wsgi.input'] = StringIO(json.dumps({'path':path}))
     
     return Request(uenv)
+
+def objput(req):
+    uenv = req.environ.copy()
+    uenv['REQUEST_METHOD'] = 'POST'
+    uenv['PATH_INFO'] = strFilePut
+    uenv['RAW_PATH_INFO'] = strFilePut
+
+    path = '/'.join(req.path.split('/')[2:])
+    uenv['HTTP_PATH']= path
+    return Request(uenv)
+
+def objget(req):
+    uenv = req.environ.copy()
+    uenv['REQUEST_METHOD'] = 'POST'
+    uenv['PATH_INFO'] = strFileGet
+    uenv['RAW_PATH_INFO'] = strFileGet
+
+    path = '/'.join(req.path.split('/')[2:])
+    uenv['wsgi.input'] = StringIO(json.dumps({'path':path}))
+        
+    return Request(uenv)
+
+def objdelete(req):
+    uenv = req.environ.copy()
+    uenv['REQUEST_METHOD'] = 'POST'
+    uenv['PATH_INFO'] = strFileDelete
+    uenv['RAW_PATH_INFO'] = strFileDelete
+
+    path = '/'.join(req.path.split('/')[2:])
+    uenv['wsgi.input'] = StringIO(json.dumps({'path':path}))
+        
+    return Request(uenv)
+
+def objhead(req):
+    uenv = req.environ.copy()
+    uenv['REQUEST_METHOD'] = 'POST'
+    uenv['PATH_INFO'] = strFileHead
+    uenv['RAW_PATH_INFO'] = strFileHead
+
+    path = '/'.join(req.path.split('/')[2:])
+    uenv['wsgi.input'] = StringIO(json.dumps({'path':path,'is_swift':'true'}))
+
+    return Request(uenv)
+
+def objpost(req):
+    uenv = req.environ.copy()
+    uenv['REQUEST_METHOD'] = 'POST'
+    uenv['PATH_INFO'] = strFilePost
+    uenv['RAW_PATH_INFO'] = strFilePost
+
+    path = '/'.join(req.path.split('/')[2:])
+    uenv['wsgi.input'] = StringIO(json.dumps({'path':path}))
+    
+    return Request(uenv)    
+
