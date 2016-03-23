@@ -8,7 +8,7 @@ class Mission:
     def __init__(self):
         
         self.host='127.0.0.1'
-        self.port = 7013
+        self.port = 7090
         self.conn = None
         self.connection_flag = False
         self.readsize = 4096

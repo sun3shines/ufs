@@ -39,7 +39,6 @@ class ServerController(object):
         
     def __call__(self, env, start_response):
         req = Request(env)
-        
         self.logger.txn_id = req.headers.get('x-trans-id', None)
         if not check_utf8(req.path_info):
             res = jresponse('-1', 'invalid utf8', req,412)

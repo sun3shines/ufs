@@ -55,9 +55,9 @@ if __name__ == '__main__':
     
 #    t = AccountGet('li')
 #    t = AccountPut('li')
-#    t = AccountHead('li')
-    t = AccountPost('li',quota=100)
-    import pdb;pdb.set_trace()
+    t = AccountHead('li')
+#    t = AccountPost('li',quota=300)
+#    import pdb;pdb.set_trace()
     t = mission.execute(t)
     print t.status
     print t.data

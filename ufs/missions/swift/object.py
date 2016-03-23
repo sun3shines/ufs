@@ -77,10 +77,10 @@ class ObjectPost(SwiftTask):
 if __name__ == '__main__':
 
 #    t = ObjectGet('li/test/obj.txt')
-#    t = ObjectPut('li/test/obj.txt','/root/install.log')
+    t = ObjectPut('li/test/obj1.txt','/root/install.log')
 #    t = ObjectHead('li/test/obj.txt')
 #    t = ObjectPost('li/test/obj.txt',oquota=100)
-    t = ObjectDelete('li/test/obj.txt')
+#    t = ObjectDelete('li/test/obj.txt')
 #    import pdb;pdb.set_trace()
     t = mission.execute(t)
     print t.status
