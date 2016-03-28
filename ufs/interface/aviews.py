@@ -16,7 +16,7 @@ def get(req):
     if not a.exists:
         return Response(status=404)
     attrs = a.list()
-    
+    attrs = [{'a':'b'},{'c':'d'}] 
     return Response(body=json.dumps(attrs),status=200)
 
 def put(req):
@@ -47,10 +47,16 @@ def head(req):
 
     param = json.loads(req.body)
     path = path2o(param.get('path'))
+    is_swift = param.get('is_swift')
+
     a = ASt(path)
     if not a.exists:
         return Response(status=404)
     
     attrs = a.getm()
-    return Response(body = json.dumps(attrs),status=200)
+    if 'true' == is_swift:
+        return Response(status=200,headers=attrs)
+    else:
+        return Response(body=json.dumps(attrs),status=200)
+
 

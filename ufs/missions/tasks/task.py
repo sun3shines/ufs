@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-class Task:
+class Task(object):
     
     def __init__(self):
         self.execute = False

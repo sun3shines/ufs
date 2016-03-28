@@ -60,10 +60,13 @@ class FSt:
                     return 200
                 else:
                     return 404
-
-        else: 
+        else:
             m = MSt(md5)
-            m.put(fileinput)
+            if m.exists:
+                # 兼容swift，数据读空
+                MSt('null').put(fileinput)
+            else:
+                m.put(fileinput)
             self.setm({'md5':md5,'ftype':'f'})
             return 200
 

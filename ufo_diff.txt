@@ -174,3 +174,7 @@ class Sets:
 #
 增加对于swift的支持了。善小而为之。是的。
 
+
+
+因为是post，所以get的时候，有body。但是head的时候，是没有body。之前的head，是由post的方式进行的。而get，自然会获取到body的。是的。但是因为客户端是head，所以不会get到body的。因此。只能以head额方式来获取了。是的。
+所以，就有点蛋疼了。

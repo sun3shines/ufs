@@ -8,12 +8,12 @@ class Mission:
     def __init__(self):
         
         self.host='127.0.0.1'
-        self.port = 7013
+        self.port = 7090
         self.conn = None
         self.connection_flag = False
         self.readsize = 4096
  
-        self.timeout = 100
+        self.timeout = 1000
         
     def __enter__(self):
         self.connect()
@@ -43,6 +43,11 @@ class Mission:
         self.conn.request(t.getMethod(),t.getUrl(),t.getBody(),t.getHeaders())
         resp = self.conn.getresponse()
         t.status = resp.status
+
+        t.headers = {}
+        for item in resp.getheaders():
+            t.headers[item[0]] = item[1]
+
         t.data = resp.read()
         t.execute = True
         return t
